@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: nyc_raw
+    description: "Raw NYC Yellow Taxi data loaded from Socrata API"
+    database: workspace
+    schema: nyc_raw
+    tables:
+
+      - name: raw_trips
+        description: "50,000 NYC Yellow Taxi trips — January 2022"
+        columns:
+          - name: vendorid
+            description: "Taxi vendor: 1=Creative Mobile Tech, 2=VeriFone"
+          - name: tpep_pickup_datetime
+            description: "Pickup timestamp — when meter was engaged (stored as STRING)"
+          - name: tpep_dropoff_datetime
+            description: "Dropoff timestamp — when meter was disengaged (stored as STRING)"
+          - name: passenger_count
+            description: "Number of passengers — driver entered value"
+          - name: trip_distance
+            description: "Trip distance in miles"
+          - name: pulocationid
+            description: "TLC taxi zone ID where trip started"
+          - name: dolocationid
+            description: "TLC taxi zone ID where trip ended"
+          - name: payment_type
+            description: "1=Credit card, 2=Cash, 3=No charge, 4=Dispute"
+          - name: fare_amount
+            description: "Meter fare based on time and distance"
+          - name: tip_amount
+            description: "Tip — auto populated for credit card payments"
+          - name: total_amount
+            description: "Total amount charged to passenger"
+          - name: congestion_surcharge
+            description: "NYC congestion surcharge — $2.50 in Manhattan"
+
+      - name: raw_zones
+        description: "265 NYC taxi zone definitions with borough names"
+        columns:
+          - name: locationid
+            description: "Unique zone ID — matches pulocationid and dolocationid in trips"
+          - name: borough
+            description: "NYC borough: Manhattan, Brooklyn, Queens, Bronx, Staten Island"
+          - name: zone
+            description: "Specific zone name within the borough"
+          - name: service_zone
+            description: "Service type: Yellow Zone, Boro Zone, EWR"
